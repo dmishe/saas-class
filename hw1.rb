@@ -49,6 +49,39 @@ def combine_anagrams(words)
   words.group_by { |word| word.chars.sort.join }.values
 end
 
+
+class Dessert
+  attr_accessor :calories
+  
+  def initialize(name, calories)
+    @name = name
+    @calories = calories
+  end
+
+  def healthy?
+    @calories < 200
+  end
+
+  def delicious?
+    true
+  end
+end
+
+class JellyBean < Dessert
+  attr_accessor :flavor
+  
+  def initialize(name, calories, flavor)
+    super(name, calories)
+    @flavor = flavor
+  end
+
+  def delicious?
+    return false if @flavor == 'black licorice'
+    super
+  end
+end
+
+
 class HW1Test < Test::Unit::TestCase
   def test_palindrome
     assert palindrome?("A man, a plan, a canal -- Panama")
@@ -113,4 +146,21 @@ class HW1Test < Test::Unit::TestCase
     output = combine_anagrams(['cars', 'for', 'potatoes', 'racs', 'four','scar', 'creams', 'scream'])
     assert (input - output).length == 0, "lists should have the same content"
   end
+  
+  def test_desserts
+    dessert = Dessert.new("icecream", 150)
+    assert dessert.delicious?
+    assert dessert.healthy?
+    
+    dessert.calories = 300
+    assert !dessert.healthy?
+    
+    jelly = JellyBean.new("icecream", 150, "strawberry")
+    assert jelly.delicious?
+    assert jelly.healthy?
+    
+    jelly.flavor = 'black licorice'
+    assert !jelly.delicious?
+  end
+    
 end
