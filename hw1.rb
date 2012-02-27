@@ -45,6 +45,9 @@ def rps_game_tournament(tournament)
   end)  
 end
 
+def combine_anagrams(words)
+  words.group_by { |word| word.chars.sort.join }.values
+end
 
 class HW1Test < Test::Unit::TestCase
   def test_palindrome
@@ -103,5 +106,11 @@ class HW1Test < Test::Unit::TestCase
         [ ["David E.", "R"], ["Richard X.", "P"] ]
       ]
       ]))
+  end
+  
+  def test_anagrams
+    input = [["cars", "racs", "scar"], ["four"], ["for"], ["potatoes"], ["creams", "scream"]]
+    output = combine_anagrams(['cars', 'for', 'potatoes', 'racs', 'four','scar', 'creams', 'scream'])
+    assert (input - output).length == 0, "lists should have the same content"
   end
 end
