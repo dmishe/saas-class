@@ -21,7 +21,7 @@ def rps_game_winner(players)
   return players[1] if rules.include? player_strategies.reverse
 end
 
-def rps_game_tournament(tournament)
+def rps_tournament_winner(tournament)
   # TODO: fix with recursion
   rps_game_winner(tournament.map do |round|
     rps_game_winner(round.map {|x| rps_game_winner(x)})    
