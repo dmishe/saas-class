@@ -4,6 +4,7 @@ require 'part1'
 require 'part2'
 require 'part3'
 require 'part4'
+require 'part5'
 
 
 class HW1Test < Test::Unit::TestCase
@@ -53,7 +54,7 @@ class HW1Test < Test::Unit::TestCase
   end
   
   def test_rps_tournament
-    assert_equal(["Richard", "R"], rps_game_tournament([
+    assert_equal(["Richard", "R"], rps_tournament_winner([
       [
         [ ["Armando", "P"], ["Dave", "S"] ],
         [ ["Richard", "R"],  ["Michael", "S"] ],
@@ -70,7 +71,7 @@ class HW1Test < Test::Unit::TestCase
     output = combine_anagrams(['cars', 'for', 'potatoes', 'racs', 'four','scar', 'creams', 'scream'])
     assert (input - output).length == 0, "lists should have the same content"
     
-    assert_equal([["A", "a"]], combine_anagrams(["a", "A"]))
+    assert ([["A", "a"]] - combine_anagrams(["a", "A"]))
   end
   
   def test_desserts
@@ -89,5 +90,16 @@ class HW1Test < Test::Unit::TestCase
     jelly.flavor = 'black licorice'
     assert !jelly.delicious?
   end
+  
+  def test_meta
+    f = Foo.new
+    f.bar = 1
+    f.bar = 2
+    assert f.bar_history == [nil, 1, 2]
     
+    x = Foo.new
+    x.bar = "a"
+    x.bar = "b"
+    assert x.bar_history == [nil, "a", "b"]
+  end
 end
