@@ -22,8 +22,12 @@ def rps_game_winner(players)
 end
 
 def rps_tournament_winner(tournament)
-  # TODO: fix with recursion
-  rps_game_winner(tournament.map do |round|
-    rps_game_winner(round.map {|x| rps_game_winner(x)})    
-  end)  
+  return rps_game_winner(tournament) if tournament.flatten.length == 4
+  players = tournament.flatten(2)
+  
+  while players.length > 1
+    players = players.each_slice(2).map { |x| rps_game_winner(x) }
+  end
+  
+  players[0]
 end
