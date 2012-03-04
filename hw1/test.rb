@@ -54,35 +54,39 @@ class HW1Test < Test::Unit::TestCase
   end
   
   def test_rps_tournament
-    # assert_equal(["Richard", "R"], rps_tournament_winner([
-    #   [
-    #     [ ["Armando", "P"], ["Dave", "S"] ],
-    #     [ ["Richard", "R"],  ["Michael", "S"] ],
-    #   ],
-    #   [ 
-    #     [ ["Allen", "S"], ["Omer", "P"] ],
-    #     [ ["David E.", "R"], ["Richard X.", "P"] ]
-    #   ]
-    #   ]))
-      
-    assert_equal(["A3", "R"], rps_tournament_winner([
-      [
-        [ ["A1", "P"], ["A2", "S"] ],
-        [ ["A3", "R"],  ["A4", "S"] ],            #A3, R
-      ],
+    assert_equal(["Richard", "R"], rps_tournament_winner([
       [
         [ ["Armando", "P"], ["Dave", "S"] ],
-        [ ["Richard", "R"],  ["Michael", "S"] ],  #Richard, R
-      ],
-      [
-        [ ["Armando", "P"], ["Dave", "S"] ],
-        [ ["Richard", "R"],  ["Michael", "S"] ],  #Richard, R
+        [ ["Richard", "R"],  ["Michael", "S"] ],
       ],
       [ 
         [ ["Allen", "S"], ["Omer", "P"] ],
-        [ ["David E.", "R"], ["Richard X.", "P"] ]#Allen, S
+        [ ["David E.", "R"], ["Richard X.", "P"] ]
       ]
-      ]*4))
+      ]))
+      
+    assert_equal(["A3", "R"], rps_tournament_winner([
+      [
+        [
+          [ ["A1", "P"], ["A2", "S"] ],
+          [ ["A3", "R"],  ["A4", "S"] ],           
+        ],
+        [
+          [ ["Armando", "P"], ["Dave", "S"] ],
+          [ ["Richard", "R"],  ["Michael", "S"] ], 
+        ]
+      ],
+      [
+        [
+          [ ["Armando", "P"], ["Dave", "S"] ],
+          [ ["Richard", "R"],  ["Michael", "S"] ], 
+        ],
+        [
+          [ ["Armando", "P"], ["Dave", "S"] ],
+          [ ["Richard", "R"],  ["Michael", "S"] ], 
+        ]
+      ]
+    ]))
   
       
     assert_equal(["Richard", "R"], rps_tournament_winner([ ["Richard", "R"],  ["Michael", "S"] ]))  

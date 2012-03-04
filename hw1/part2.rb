@@ -23,7 +23,8 @@ end
 
 def rps_tournament_winner(tournament)
   return rps_game_winner(tournament) if tournament.flatten.length == 4
-  players = tournament.flatten(2)
+
+  players = tournament.flatten.each_slice(2).to_a
   
   while players.length > 1
     players = players.each_slice(2).map { |x| rps_game_winner(x) }
