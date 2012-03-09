@@ -37,10 +37,18 @@ class String; def palindrome?; _palindrome?(self) end; end
 
 module Enumerable
   def palindrome?
-    self.respond_to?(:reverse) ? self == self.reverse : false
+    self.to_a.respond_to?(:reverse) ? self.to_a == self.to_a.reverse : false
   end
 end
 
+class VPT
+  include Enumerable
+  
+  @@l = [1,2,3,2,1]
+  def each
+    @@l.each {|x| yield x}
+  end
+end
 
 class HW2Test < Test::Unit::TestCase
   def test_a
@@ -68,5 +76,7 @@ class HW2Test < Test::Unit::TestCase
     
     pvalue = Hash.new.palindrome?
     assert pvalue.is_a?(TrueClass) || pvalue.is_a?(FalseClass)
+
+    assert VPT.new.palindrome?
   end
 end
