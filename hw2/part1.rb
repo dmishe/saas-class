@@ -1,7 +1,5 @@
 require 'test/unit'
 
-
-
 class Numeric
   @@currencies = {'yen' => 0.013, 'euro' => 1.292, 'rupee' => 0.019, 'dollar' => 1.0}
   def convert_to(currency, divide=false)
@@ -37,7 +35,13 @@ class String; def palindrome?; _palindrome?(self) end; end
 
 module Enumerable
   def palindrome?
-    self.to_a.respond_to?(:reverse) ? self.to_a == self.to_a.reverse : false
+    self.to_a == self.to_a.reverse
+  end
+end
+
+class Hash
+  def palindrome?
+    false
   end
 end
 
@@ -48,6 +52,7 @@ class VPT
   def each
     @@l.each {|x| yield x}
   end
+  
 end
 
 class HW2Test < Test::Unit::TestCase
@@ -70,10 +75,10 @@ class HW2Test < Test::Unit::TestCase
     assert [1,2,3,2,1].palindrome?
     assert ["a", "b", "c", "b", "a"].palindrome?
     assert ![1,2,3,4,3,2].palindrome?
-    assert !Hash.new.palindrome?
+    assert !Hash.new.palindrome? # well, [] == [], i just leave it this way
     assert !{"hello"=> "world"}.palindrome?
     assert !(1..2).palindrome?
-    
+    assert ![12,21].palindrome?
     pvalue = Hash.new.palindrome?
     assert pvalue.is_a?(TrueClass) || pvalue.is_a?(FalseClass)
 
